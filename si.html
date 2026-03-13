@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전기기능사 필수 심벌 & 도해</title>
+    <style>
+        :root { --border: #444; --bg: #fdfdfd; --header: #2c3e50; }
+        body { font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 5px; background: #eee; font-size: 0.65rem; line-height: 1.4; }
+        .page { background: var(--bg); max-width: 600px; margin: 0 auto; border: 1px solid var(--border); padding: 10px; }
+        h1 { font-size: 1rem; text-align: center; color: white; background: var(--header); margin: -10px -10px 10px -10px; padding: 10px; }
+        h2 { font-size: 0.8rem; border-bottom: 2px solid var(--header); padding-bottom: 3px; color: var(--header); margin-top: 15px; }
+
+        .symbol-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin: 10px 0; }
+        .item { border: 1px solid #ddd; padding: 5px; display: flex; align-items: center; background: white; }
+        .char { width: 30px; height: 30px; border: 1px solid #333; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-right: 8px; font-size: 0.8rem; border-radius: 50%; }
+        .desc { flex: 1; }
+
+        .box { background: #fff; border: 1px solid #aaa; padding: 8px; margin-bottom: 10px; }
+        .tag { display: inline-block; background: #555; color: #fff; padding: 1px 4px; border-radius: 3px; font-size: 0.55rem; margin-right: 3px; }
+        .important { color: #d32f2f; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <h1>전기기능사 필수 도해 & 심벌</h1>
+
+    <h2>1. 배선도 기호 (평면도용)</h2>
+
+    <div class="symbol-grid">
+        <div class="item"><div class="char">●</div><div class="desc"><b>일반 조명:</b> 천장 붙임 등</div></div>
+        <div class="item"><div class="char">Ⓢ</div><div class="desc"><b>스위치:</b> 단극 스위치</div></div>
+        <div class="item"><div class="char">Ⓢ3</div><div class="desc"><b>3로 스위치:</b> 2개소 점멸</div></div>
+        <div class="item"><div class="char">Ⓢ4</div><div class="desc"><b>4로 스위치:</b> 3개소 점멸</div></div>
+        <div class="item"><div class="char">벽</div><div class="desc"><b>벽붙이 조명:</b> 전선이 벽에 연결</div></div>
+        <div class="item"><div class="char">H</div><div class="desc"><b>방열형:</b> 전열기(Heater)</div></div>
+    </div>
+
+    <h2>2. 콘센트 심벌 (수치 암기)</h2>
+    <div class="box">
+        <ul>
+            <li><span class="tag">●</span> <b>일반 콘센트:</b> 벽에 설치</li>
+            <li><span class="tag">●2</span> <b>2구 콘센트:</b> 구멍이 두 개</li>
+            <li><span class="tag">●ET</span> <b>접지단자 붙이:</b> 접지극이 있음</li>
+            <li><span class="tag">●WP</span> <b>방우형:</b> <span class="important">습기/물기 있는 곳</span></li>
+            <li><span class="tag">●EX</span> <b>방폭형:</b> 가스 폭발 위험 장소</li>
+        </ul>
+    </div>
+
+    <h2>3. 시퀀스 제어 (A/B접점)</h2>
+
+    <div class="box">
+        <ul>
+            <li><b>A접점 (NO):</b> 평상시 열려 있다가 동작 시 닫힘 (동작 접점)</li>
+            <li><b>B접점 (NC):</b> 평상시 닫혀 있다가 동작 시 열림 (정지 접점)</li>
+            <li><b>C접점:</b> A와 B를 합친 전환 접점</li>
+            <li><b>한시 동작 (On-Delay):</b> 설정 시간 후 동작 (삼각형이 위로)</li>
+            <li><b>한시 복귀 (Off-Delay):</b> 설정 시간 후 복귀 (삼각형이 아래로)</li>
+        </ul>
+    </div>
+
+    <h2>4. 전선관 및 선종 기호</h2>
+
+    <div class="box">
+        <ul>
+            <li><b>굵은 실선:</b> 천장 은폐 배선 (가장 일반적)</li>
+            <li><b>점선:</b> 바닥 은폐 배선</li>
+            <li><b>노출 배선:</b> 가는 실선에 사선(/) 표시</li>
+            <li><b>E:</b> 금속관 (Steel Conduit)</li>
+            <li><b>F:</b> 가요 전선관 (Flexible)</li>
+            <li><b>VE:</b> 경질 비닐관 (PVC)</li>
+        </ul>
+    </div>
+
+    <h2>5. 배전반 및 기타</h2>
+    <div class="symbol-grid">
+        <div class="item"><div class="char">□</div><div class="desc"><b>배전반:</b> 전력 수용 시작점</div></div>
+        <div class="item"><div class="char">▣</div><div class="desc"><b>분전반:</b> 각 회로 분기점</div></div>
+        <div class="item"><div class="char">M</div><div class="desc"><b>전력량계:</b> 전력 사용량 측정</div></div>
+        <div class="item"><div class="char">P</div><div class="desc"><b>압력 스위치:</b> 압력 감지</div></div>
+    </div>
+
+    <div style="background: #fdfae6; border: 1px dashed #666; padding: 10px; margin-top: 10px;">
+        <b>※ 시험장 팁:</b> <br>
+        1. <b>방우형(WP)</b>과 <b>방습형(D)</b>을 혼동하지 마세요. <br>
+        2. <b>3로 스위치</b> 문제는 항상 "2개소 점멸"이라는 키워드와 함께 나옵니다. <br>
+        3. 도면에서 <b>점선</b>이 보이면 무조건 "바닥 밑"을 떠올리세요.
+    </div>
+</div>
+
+</body>
+</html>

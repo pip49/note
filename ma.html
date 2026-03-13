@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전기기능사 Master - 제2과목 전기기기</title>
+    <style>
+        :root { --bg: #ffffff; --text: #222; --line: #222; --sub: #f8f9fa; --point: #444; }
+        body { font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 5px; background: var(--bg); color: var(--text); font-size: 0.65rem; line-height: 1.4; }
+        .header { text-align: center; border: 2px solid var(--line); padding: 8px; margin-bottom: 10px; background: #333; color: #fff; }
+        .header h1 { margin: 0; font-size: 1.1rem; }
+
+        .grid-container { display: grid; grid-template-columns: 1fr; gap: 10px; }
+        @media (min-width: 600px) { .grid-container { grid-template-columns: 1fr 1fr; } }
+
+        section { border: 1px solid var(--line); padding: 7px; background: #fff; }
+        h2 { font-size: 0.85rem; margin: -7px -7px 7px -7px; padding: 5px; background: var(--point); color: white; display: flex; justify-content: space-between; }
+        h3 { font-size: 0.75rem; margin: 8px 0 3px 0; border-bottom: 1.5px solid var(--line); color: #000; font-weight: bold; }
+
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { margin-bottom: 4px; border-bottom: 0.1px solid #eee; padding-bottom: 2px; }
+        b { font-weight: bold; color: #000; }
+
+        .formula { font-family: "Consolas", monospace; font-weight: bold; background: #efefef; padding: 1px 3px; border-radius: 2px; display: inline-block; margin: 1px 0; border: 0.5px solid #ccc; }
+        .box { background: #fdfdfd; border-left: 3px solid #666; padding-left: 5px; margin: 5px 0; }
+        .important { color: #d32f2f; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>제2과목: 전기기기 (핵심 총정리)</h1>
+    <span>기계적 구조와 전기적 특성의 결합</span>
+</div>
+
+<div class="grid-container">
+    <section>
+        <h2>1. 직류기 (DC Machines) <span>발전기/전동기</span></h2>
+        <h3>3대 요소 및 구조</h3>
+        <ul>
+            <li><b>계자(Field):</b> 자속 발생, <b>전기자(Armature):</b> 기전력 발생</li>
+            <li><b>정류자(Commutator):</b> AC → DC 변환, <b>브러시:</b> 외부 인출</li>
+            <li><b>전기자 권선법:</b> <span class="important">중권(병렬회로수 a=p, 저압대전류)</span>, <span class="important">파권(a=2, 고압소전류)</span></li>
+        </ul>
+        <h3>발전기 이론</h3>
+        <ul>
+            <li><b>유도기전력(E):</b> <span class="formula">E = (PZ / 60a)ΦN = kΦN</span> <span class="unit">[V]</span></li>
+            <li><b>전기자 반작용:</b> 편자/감자작용 발생 → 중성축 이동, 정류 불량, 섬락</li>
+            <li><b>방지대책:</b> <span class="important">보상권선(가장 효과적)</span>, 보극 설치</li>
+            <li><b>전압변동률(ε):</b> <span class="formula">ε = {(V0 - Vn) / Vn} × 100</span></li>
+        </ul>
+        <h3>전동기 특성 (암기 필수)</h3>
+        <ul>
+            <li><b>역기전력(Ec):</b> <span class="formula">Ec = V - IaRa</span></li>
+            <li><b>회전수(N):</b> <span class="formula">N = (V - IaRa) / kΦ</span> (자속에 반비례)</li>
+            <li><b>토크(τ):</b> <span class="formula">τ = 0.975 · (P / N)</span> <span class="unit">[kg·m]</span></li>
+            <li><b>직권전동기:</b> <span class="important">토크는 전류의 제곱에 비례</span>, 무부하 운전 금지(벨트 탈락 주의)</li>
+            <li><b>분권전동기:</b> 정속도 전동기, 계자권선 단선 시 과속도 위험</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. 변압기 (Transformers) <span>정지기기</span></h2>
+        <h3>원리 및 구조</h3>
+        <ul>
+            <li><b>원리:</b> 전자유도작용 (상호유도), <b>철심:</b> 규소강판 성층(와류손 감소)</li>
+            <li><b>권수비(a):</b> <span class="formula">a = N1/N2 = V1/V2 = I2/I1 = √(Z1/Z2)</span></li>
+            <li><b>유도기전력:</b> <span class="formula">E = 4.44 f N Φm</span></li>
+        </ul>
+        <h3>특성 및 효율</h3>
+        <ul>
+            <li><b>백분율 임피던스(%Z):</b> <span class="formula">%Z = (InZ / Vn) × 100</span></li>
+            <li><b>전압변동률:</b> <span class="formula">p cosθ + q sinθ</span> (p:저항강하, q:리액턴스강하)</li>
+            <li><b>손실:</b> <span class="important">철손(무부하손) = 동손(부하손) 일 때 최대 효율</span></li>
+            <li><b>변압기유 4대 조건:</b> 절연내력 클 것, 냉각효과 클 것, 인화점 높을 것, 응고점 낮을 것</li>
+        </ul>
+        <h3>결선 및 병렬운전</h3>
+        <ul>
+            <li><b>Δ-Δ:</b> 1대 고장 시 <span class="important">V-V 결선</span> 가능 (이용률 86.6%, 출력 57.7%)</li>
+            <li><b>Y-Y:</b> 중성점 접지 가능, 제3고조파 장해 발생</li>
+            <li><b>Δ-Y:</b> 승압용, <b>Y-Δ:</b> 강압용 (위상차 30°)</li>
+            <li><b>병렬운전 조건:</b> 극성, 권수비, 전압, %Z 임피던스 일치할 것</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. 동기기 (Synchronous Machines) <span>교류발전기</span></h2>
+        <h3>구조 및 속도</h3>
+        <ul>
+            <li><b>구조:</b> <span class="important">회전계자형</span> 주로 사용 (기계적 튼튼, 절연 용이)</li>
+            <li><b>동기속도(Ns):</b> <span class="formula">Ns = 120f / P</span> <span class="unit">[rpm]</span></li>
+            <li><b>동기임피던스:</b> <span class="formula">Zs = √(Ra² + Xs²) ≒ Xs</span></li>
+        </ul>
+        <h3>운전 특성</h3>
+        <ul>
+            <li><b>단락비(K):</b> <span class="formula">K = 1 / %Zs</span>. <span class="important">단락비가 크면:</span> 기계가 크다, 전압변동률 작다, 안정도 높다</li>
+            <li><b>병렬운전 조건:</b> <span class="important">기전력의 크기, 위상, 주파수, 파형</span>이 같을 것</li>
+            <li><b>동기검정기:</b> 위상차 확인 장치</li>
+            <li><b>난조방지:</b> <span class="important">제동권선(Amortisseur winding)</span> 설치</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. 유도기 (Induction Motors) <span>3상 전동기</span></h2>
+        <h3>회전 원리 및 슬립</h3>
+        <ul>
+            <li><b>원리:</b> 아라고의 원판, 회전자계 발생</li>
+            <li><b>슬립(s):</b> <span class="formula">s = (Ns - N) / Ns</span> (정지 시 s=1, 동기속도 시 s=0)</li>
+            <li><b>회전속도(N):</b> <span class="formula">N = (1-s)Ns = (1-s) · (120f/P)</span></li>
+            <li><b>주파수 관계:</b> 회전 시 주파수 <span class="formula">f2 = s · f1</span></li>
+        </ul>
+        <h3>기동 및 제어</h3>
+        <ul>
+            <li><b>기동법(농형):</b> 직입(5kW↓), Y-Δ(5~15kW), 기동보상기(15kW↑)</li>
+            <li><b>기동법(권선형):</b> <span class="important">2차 저항 제어(비례추이)</span></li>
+            <li><b>속도제어:</b> 극수 변환, 주파수 제어(인버터), 2차 저항 제어</li>
+            <li><b>단상 유도전동기 기동토크 순서:</b> <span class="important">반발기동 > 반발유도 > 콘덴서기동 > 분상기동 > 쉐이딩코일</span></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>5. 정류기 / 특수기기 <span>Power Electronics</span></h2>
+        <h3>정류 소자</h3>
+        <ul>
+            <li><b>반도체 소자:</b> <span class="important">SCR(단방향 3단자, 위상제어)</span>, TRIAC(양방향 3단자)</li>
+            <li><b>SCR 턴온 조건:</b> 양극(+), 음극(-), 게이트(+) 신호 인가</li>
+            <li><b>다이오드 정류:</b> 단상 반파(0.45E), 단상 전파(0.9E), 3상 반파(1.17E), 3상 전파(1.35E)</li>
+        </ul>
+        <h3>특수 전동기</h3>
+        <ul>
+            <li><b>스테핑 모터:</b> 펄스 신호에 따라 일정 각도 회전 (위치 제어)</li>
+            <li><b>서보 모터:</b> 제어용 모터, 응답 속도 빠름</li>
+            <li><b>유니버셜 모터:</b> AC/DC 겸용, 직권전동기 구조</li>
+        </ul>
+    </section>
+</div>
+
+</body>
+</html>

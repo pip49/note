@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>단답형 문제풀이</title>
+    <style>
+        /* 기존 디자인 유지 및 보강 */
+        body { font-family: 'Arial', sans-serif; background-color: #f4f7f6; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .quiz-container { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 100%; max-width: 600px; box-sizing: border-box; }
+
+	/* 상단 헤더 및 입력창 스타일 */
+.header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #3498db;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.jump-container { display: flex; align-items: center; gap: 5px; }
+.jump-input {
+    width: 50px;
+    padding: 6px;
+    border: 1px solid #bdc3c7;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+.btn-jump {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    background: #34495e;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+        .btn-mode { padding: 5px 10px; font-size: 0.8rem; background: #ecf0f1; color: #7f8c8d; border: 1px solid #bdc3c7; border-radius: 4px; cursor: pointer; }
+        .btn-mode.active { background: #2ecc71; color: white; border-color: #27ae60; }
+
+	.question { font-size: 1.1rem; font-weight: bold; margin-bottom: 20px; line-height: 1.7; color: #34495e; word-break: keep-all; }
+
+        .question img, .answer-box img { max-width: 100%; height: auto; display: block; margin: 10px 0; border-radius: 6px; }
+        .question audio, .answer-box audio { width: 100%; margin: 10px 0; }
+
+        .answer-box { display: none; background: #e8f4fd; border-left: 5px solid #3498db; padding: 15px; margin-top: 20px; border-radius: 4px; font-size: 1rem; line-height: 1.6; word-break: keep-all; }
+
+        /* 버튼 그룹 */
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        button { flex: 1; padding: 12px; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; transition: 0.3s; font-weight: bold; }
+        .btn-prev { background-color: #95a5a6; color: white; }
+        .btn-check { background-color: #34495e; color: white; }
+        .btn-next { background-color: #3498db; color: white; }
+        button:hover { opacity: 0.9; }
+        button:disabled { background-color: #dcdde1; cursor: not-allowed; }
+
+        .info { font-size: 0.85rem; color: #95a5a6; margin-top: 20px; text-align: center; }
+        a { color: #3498db; text-decoration: underline; }
+
+	/* 아주 작은 푸터 스타일 */
+.mini-footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    font-size: 0.75rem; /* 아주 작은 글씨 */
+    color: #95a5a6; /* 연한 회색 */
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #3498db; /* 마우스 올리면 파란색 */
+    text-decoration: underline;
+}
+
+/* 구분선(|) 스타일 */
+.footer-links span {
+    font-size: 0.7rem;
+    color: #ecf0f1;
+}
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+
+	<div class="header-row">
+    <h1>⚡ 암기노트</h1>
+    <div class="jump-container">
+        <input type="number" id="jumpNum" class="jump-input" placeholder="번호">
+        <button class="btn-jump" onclick="goToQuiz()">이동</button>
+        <button id="modeBtn" class="btn-mode" onclick="toggleMode()">랜덤 모드</button>
+    </div>
+
+</div>
+
+    <div id="quiz-count" style="font-size: 0.85rem; color: #7f8c8d; margin-bottom: 10px;"></div>
+
+    <div id="quiz-content">
+        <div class="question" id="questionText">문제를 불러오는 중...</div>
+        <div class="answer-box" id="answerBox">
+            <strong>정답 및 해설:</strong> <br>
+            <span id="answerText"></span>
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <button id="prevBtn" class="btn-prev" onclick="prevQuiz()" style="display:none;">이전</button>
+        <button class="btn-check" onclick="showAnswer()">정답 확인</button>
+        <button class="btn-next" onclick="nextQuiz()">다음 문제</button>
+    </div>
+
+    <p class="info" id="statusInfo">모드를 선택하고 학습을 시작하세요.</p>
+<div class="mini-footer">
+    <div class="footer-links">
+        <a href="list.html">목차</a>
+        <span>|</span>
+        <a href="th.html">이론</a>
+        <span>|</span>
+        <a href="ma.html">기기</a>
+        <span>|</span>
+        <a href="eq.html">설비1</a>
+        <span>|</span>
+        <a href="ip.html">설비2</a>
+        <span>|</span>
+        <a href="si.html">기호</a>
+
+    </div>
+</div>
+
+</div>
+
+<script>
+    // [문제 및 선택지, 정답] 형식
+    // 여기에 모든 데이터를 넣으시면 됩니다.
+     const quizData = [
+  ["<span style='color: #003399;'>1. 전하의 성질 중 같은 종류의 전하끼리, 그리고 다른 종류의 전하끼리 작용하는 힘은?</span>", "반발력, 흡인력 (해설: 자석처럼 같은 극은 밀어내고(반발), 다른 극은 당깁니다(흡인).전기기능사의 가장 기초 개념입니다.)"],
+  ["<span style='color: #003399;'>2. 전류(I)를 구하는 기본 공식은 무엇인가? (전하량 Q, 시간 t)</span>", "I = Q / t (해설: 전류는 단위 시간당 흐르는 전하의 양입니다. 1초에 1쿨롱이 흐르면 1암페어(A)가 됩니다.)"],
+  ["<span style='color: #003399;'>3. 1[kWh]를 열량[kcal]으로 환산하면 얼마인가?</span>", "860[kcal] (해설: 1[J] = 0.24[cal] 공식을 1시간 단위로 환산한 결과값입니다. 계산기 없이도 바로 튀어나와야 하는 단골 숫자입니다.)"],
+  ["<span style='color: #003399;'>4. 온도가 상승할 때 저항값이 오히려 감소하는 성질을 가진 물질은?</span>", "반도체, 탄소, 전해액 (해설: 일반 금속은 뜨거워지면 저항이 커지지만, 얘네는 반대로 움직이는 '부온도 계수' 특성을 가집니다.)"],
+  ["<span style='color: #003399;'>5. 전선의 길이를 2배로 늘리면 저항은 몇 배가 되는가?</span>", "2배 (해설: 저항은 전선의 길이에 비례합니다. 길이(장애물 구간)가 길어질수록 통과하기 힘들어지기 때문입니다.)"],
+  ["<span style='color: #003399;'>6. 전선의 단면적을 2배로 넓히면 저항은 어떻게 변하는가?</span>", "1/2배로 감소 (해설: 저항은 단면적에 반비례합니다. 통로가 넓어지면 전기가 더 잘 흐르므로 저항은 줄어듭니다.)"],
+  ["<span style='color: #003399;'>7. '유입되는 전류의 합은 유출되는 전류의 합과 같다'는 법칙은?</span>", "키르히호프의 제1법칙(전류 법칙) (해설: 어느 한 점으로 들어온 전기는 어디론가 반드시 나가야 한다는 보존의 법칙입니다.)"],
+  ["<span style='color: #003399;'>8. 두 전하 사이에 작용하는 힘의 크기를 정하는 법칙은?</span>", "쿨롱의 법칙 (해설: 전하가 클수록 힘은 세지고, 전하 사이의 거리 제곱에 반비례하여 힘이 약해진다는 법칙입니다.)"],
+  ["<span style='color: #003399;'>9. 자기력선의 성질 중 옳은 것은? (교차 여부)</span>", "서로 교차하지 않는다 (해설: 자기력선은 N에서 S로 가며 절대 서로 겹치거나 끊어지지 않는 가상의 선입니다.)"],
+  ["<span style='color: #003399;'>10. 콘덴서에 축적되는 에너지(W)를 구하는 공식은?</span>", "W = 1/2 * C * V^2 (해설: 정전용량(C)과 전압(V)의 제곱에 비례합니다. 에너지 공식 중 가장 출제 빈도가 높습니다.)"],
+  ["<span style='color: #003399;'>11. 플레밍의 왼손 법칙은 무엇을 정의하는가?</span>", "전동기(모터)의 원리 (해설: '왼전'으로 외우세요. 자기장 속 전류가 받는 '힘의 방향'을 결정합니다.)"],
+  ["<span style='color: #003399;'>12. 플레밍의 오른손 법칙은 무엇을 정의하는가?</span>", "발전기의 원리 (해설: '우발'로 외우세요. 자속을 끊을 때 생기는 '유도기전력(전기)의 방향'을 결정합니다.)"],
+  ["<span style='color: #003399;'>13. 직류발전기의 3대 요소는?</span>", "계자, 전기자, 정류자 (해설: 자석(계자) + 회전하는 코일(전기자) + 교류를 직류로 바꾸는 부품(정류자)입니다.)"],
+  ["<span style='color: #003399;'>14. 변압기의 원리가 되는 핵심 현상은?</span>", "전자유도 작용 (해설: 1차 코일의 자기장 변화가 2차 코일에 전기를 유도해내는 원리입니다.)"],
+  ["<span style='color: #003399;'>15. 변압기 내부 결함 시 가스나 유류의 이동을 감지하는 계전기는?</span>", "브흐홀츠 계전기 (해설: 변압기 본체와 콘서베이터 사이 파이프에 설치하는 기계적 보호 장치입니다.)"],
+  ["<span style='color: #003399;'>16. 동기속도(Ns) 공식은 어떻게 되는가?</span>", "Ns = 120f / P (해설: 주파수(f)에 비례하고 극수(P)에 반비례합니다. 계산 문제로 매우 자주 나옵니다.)"],
+  ["<span style='color: #003399;'>17. 슬립(s)이 1인 상태는 어떤 상태인가?</span>", "정지 상태 (해설: 슬립은 '속도 차이 비율'입니다. 회전자가 멈춰있으면 슬립은 최대치인 1이 됩니다.)"],
+  ["<span style='color: #003399;'>18. SCR(사이리스터)의 단자 3개 이름은?</span>", "애노드, 캐소드, 게이트 (해설: 게이트(Gate)라는 대문에 신호를 주어야만 전류가 흐르는 단방향 스위치 소자입니다.)"],
+  ["<span style='color: #003399;'>19. 교류를 직류로 바꾸는 과정을 무엇이라 하는가?</span>", "정류 (해설: 다이오드 등을 이용하여 한쪽 방향으로만 전류를 흐르게 만드는 과정입니다.)"],
+  ["<span style='color: #003399;'>20. 전선의 굵기를 결정하는 가장 중요한 3요소는?</span>", "허용전류, 전압강하, 기계적 강도 (해설: 전선이 버티는 전류량, 전압 손실, 튼튼함 이 세 가지가 설계의 핵심입니다.)"],
+  ["<span style='color: #003399;'>21. 접지선의 색상은 원칙적으로 무엇인가?</span>", "녹색과 노란색의 혼합 (해설: KEC 규정에 따라 접지(보호도체)는 녹-노 혼합색을 사용합니다.)"],
+  ["<span style='color: #003399;'>22. 금속관 끝에 끼워 전선의 피복 손상을 방지하는 부품은?</span>", "부심(Bushing) (해설: 관의 날카로운 단면에 전선이 긁혀 합선되는 것을 막아줍니다.)"],
+  ["<span style='color: #003399;'>23. 가연성 가스가 있는 위험한 장소에 시공하는 공사법은?</span>", "금속관 공사 (해설: 가스가 폭발해도 불꽃이 밖으로 나가지 못하게 금속관으로 밀봉하는 '방폭' 개념입니다.)"],
+  ["<span style='color: #003399;'>24. 지지물(전봇대)이 쓰러지지 않도록 보강하는 선은?</span>", "지선 (해설: 전봇대 옆에서 비스듬히 땅으로 연결된 철선입니다. 철탑에는 지선을 사용하지 않습니다.)"],
+  ["<span style='color: #003399;'>25. 전선 접속 시 저항이 증가하면 안 되는 이유는?</span>", "열이 발생하여 화재 위험 (해설: 저항이 커지면 $I^2R$에 의해 열이 발생합니다. 접속은 단단하게 해서 저항을 최소화해야 합니다.)"],
+  ["<span style='color: #003399;'>26. 누전 시 감전을 방지하기 위해 설치하는 차단기는?</span>", "누전차단기(ELB) (해설: 나가는 전류와 들어오는 전류의 차이가 생기면 전기를 즉시 끊어버립니다.)"],
+  ["<span style='color: #003399;'>27. 화재 시 대피로를 안내하기 위해 켜지는 등은?</span>", "유도등 (해설: 비상구 위치를 알려주는 녹색 등입니다.)"],
+  ["<span style='color: #003399;'>28. 전선관 내부에서 전선을 접속해도 되는가?</span>", "안 된다 (해설: 전선 접속은 반드시 박스(조인트 박스 등) 내부에서만 해야 하며 관 안에서는 금지됩니다.)"],
+  ["<span style='color: #003399;'>29. 절연 저항을 측정하는 측정기 이름은?</span>", "메거(Megger) (해설: 전기가 새지 않는지(절연) 아주 높은 저항값을 측정하는 장치입니다.)"],
+  ["<span style='color: #003399;'>30. 사람이 쉽게 접촉하는 장소의 누전차단기 동작 시간 기준은?</span>", "0.03초 이내 (해설: 사람이 감전되어 심장이 멎기 전에 아주 빠르게 차단해야 합니다.)"]
+];
+
+    let history = [];
+    let currentHistoryIndex = -1;
+    let isRandomMode = true;
+    let sequentialIndex = 0;
+
+    function toggleMode() {
+        isRandomMode = !isRandomMode;
+        const modeBtn = document.getElementById('modeBtn');
+
+        if (isRandomMode) {
+            modeBtn.innerText = "랜덤 모드";
+            modeBtn.classList.remove('active');
+            history = [];
+            currentHistoryIndex = -1;
+        } else {
+            modeBtn.innerText = "순차 모드";
+            modeBtn.classList.add('active');
+            sequentialIndex = 0;
+        }
+        nextQuiz();
+    }
+
+// 특정 번호로 바로 가기 함수
+function goToQuiz() {
+    const input = document.getElementById('jumpNum');
+    const num = parseInt(input.value);
+
+    // 유효성 검사 (입력값이 없거나 범위를 벗어난 경우)
+    if (isNaN(num) || num < 1 || num > quizData.length) {
+        alert(`1부터 ${quizData.length} 사이의 숫자를 입력해주세요.`);
+        return;
+    }
+
+    // 번호 이동 시 자동으로 '순차 모드'로 전환하여 학습 흐름 유지
+    if (isRandomMode) {
+        isRandomMode = false;
+        const modeBtn = document.getElementById('modeBtn');
+        modeBtn.innerText = "순차 모드";
+        modeBtn.classList.add('active');
+    }
+
+    sequentialIndex = num - 1; // 배열 인덱스는 0부터 시작하므로 1을 뺌
+    displayQuiz(sequentialIndex);
+    sequentialIndex++; // 다음 문제 클릭 시 다음 번호가 나오도록 세팅
+    updatePrevButton();
+
+    input.value = ''; // 이동 후 입력창 비우기
+    input.blur();    // 키보드 닫기 (모바일 대응)
+}
+
+    function nextQuiz() {
+        if (!quizData || quizData.length === 0) return;
+
+        if (isRandomMode) {
+            if (currentHistoryIndex >= history.length - 1) {
+                const randomIndex = Math.floor(Math.random() * quizData.length);
+                history.push(randomIndex);
+                currentHistoryIndex++;
+            } else {
+                currentHistoryIndex++;
+            }
+            displayQuiz(history[currentHistoryIndex]);
+        } else {
+            if (sequentialIndex < quizData.length) {
+                displayQuiz(sequentialIndex);
+                sequentialIndex++;
+            } else {
+                alert("마지막 문제입니다. 처음으로 돌아갑니다.");
+                sequentialIndex = 0;
+                displayQuiz(sequentialIndex);
+                sequentialIndex++;
+            }
+        }
+        updatePrevButton();
+    }
+
+    function prevQuiz() {
+        if (isRandomMode) {
+            if (currentHistoryIndex > 0) {
+                currentHistoryIndex--;
+                displayQuiz(history[currentHistoryIndex]);
+            }
+        } else {
+            if (sequentialIndex > 1) {
+                sequentialIndex -= 2;
+                if (sequentialIndex < 0) sequentialIndex = 0;
+                nextQuiz();
+            }
+        }
+        updatePrevButton();
+    }
+
+    function displayQuiz(index) {
+        const selected = quizData[index];
+        document.getElementById('questionText').innerHTML = selected[0];
+        document.getElementById('answerText').innerHTML = selected[1];
+        document.getElementById('answerBox').style.display = 'none';
+
+        const modeLabel = isRandomMode ? "랜덤" : "순차";
+        document.getElementById('quiz-count').innerText = `[${modeLabel} 모드] 문항 번호: ${index + 1} / 전체 ${quizData.length}`;
+        window.scrollTo(0, 0);
+    }
+
+    function updatePrevButton() {
+        const prevBtn = document.getElementById('prevBtn');
+        const canGoBack = isRandomMode ? (currentHistoryIndex > 0) : (sequentialIndex > 1);
+        prevBtn.style.display = canGoBack ? 'block' : 'none';
+    }
+
+function showAnswer() {
+    const answerBox = document.getElementById('answerBox');
+
+    // 현재 정답창이 보이고 있다면 숨기고, 숨겨져 있다면 보여줍니다.
+    if (answerBox.style.display === 'block') {
+        answerBox.style.display = 'none';
+    } else {
+        answerBox.style.display = 'block';
+    }
+}
+
+window.onload = nextQuiz;
+</script>
+
+</body>
+</html>

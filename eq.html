@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전기기능사 Master - 제3과목 전기설비 (1/2)</title>
+    <style>
+        :root { --main-ch: #2c3e50; --sub-bg: #f4f7f6; --accent: #e74c3c; }
+        body { font-family: 'Malgun Gothic', sans-serif; margin: 0; padding: 5px; background: #fff; color: #333; font-size: 0.65rem; line-height: 1.4; }
+        .header { text-align: center; border: 3px double var(--main-ch); padding: 10px; margin-bottom: 10px; background: var(--sub-bg); }
+        .header h1 { margin: 0; font-size: 1.1rem; color: var(--main-ch); }
+        .grid-container { display: grid; grid-template-columns: 1fr; gap: 8px; }
+        @media (min-width: 600px) { .grid-container { grid-template-columns: 1fr 1fr; } }
+        section { border: 1px solid var(--main-ch); padding: 8px; background: #fff; box-shadow: 1px 1px 3px rgba(0,0,0,0.1); }
+        h2 { font-size: 0.85rem; margin: -8px -8px 8px -8px; padding: 6px; background: var(--main-ch); color: white; }
+        h3 { font-size: 0.75rem; margin: 10px 0 3px 0; padding-bottom: 2px; border-bottom: 2px solid #ddd; color: #2980b9; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { margin-bottom: 4px; border-bottom: 0.5px solid #eee; padding-bottom: 2px; }
+        b { font-weight: bold; color: #000; }
+        .data { font-family: "Consolas", monospace; font-weight: bold; color: var(--accent); background: #fff0f0; padding: 0 2px; border-radius: 2px; }
+        .info-box { background: #fdfae6; border: 1px dashed #ccc; padding: 5px; margin: 5px 0; }
+        .important { text-decoration: underline; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>제3과목: 전기설비 (상편: 전선 및 배선공사)</h1>
+    <span>암기 수치 중심 / KEC 규정 반영</span>
+</div>
+
+<div class="grid-container">
+    <section>
+        <h2>1. 전선의 종류와 특성</h2>
+        <h3>도체 및 절연전선</h3>
+        <ul>
+            <li><b>도체 도전율:</b> 연동선(<span class="data">100%</span>), 경동선(<span class="data">97%</span>), 알루미늄(<span class="data">61%</span>)</li>
+            <li><b>전선 구조:</b> 단선(지름), 연선(소선수 <span class="data">n=3n(n+1)+1</span>)</li>
+            <li><b>인입용 비닐절연전선:</b> <span class="important">DV</span> (가공 인입선용)</li>
+            <li><b>옥외용 비닐절연전선:</b> <span class="important">OW</span> (옥외 가공선용)</li>
+            <li><b>내열용 비닐절연전선:</b> <span class="important">HIV</span> (가장 많이 사용)</li>
+            <li><b>케이블:</b> VV(PVC), CV(가교폴리에틸렌), CT(캡타이어)</li>
+        </ul>
+        <h3>전선의 접속 (KEC)</h3>
+        <ul>
+            <li><b>접속 원칙:</b> 전기저항 증가 금지, 인장강도 <span class="data">20% 이상 감소 금지</span></li>
+            <li><b>와이어 커넥터:</b> 박스 내 전선 연결 시 사용</li>
+            <li><b>트위스트 접속:</b> <span class="data">2.5mm² 이하</span> 가는 단선</li>
+            <li><b>브리타니아 접속:</b> <span class="data">3.2mm 이상</span> 굵은 단선 (조인트선 사용)</li>
+            <li><b>절연 테이프:</b> 반폭 이상 겹쳐서 <span class="data">2회(4겹) 이상</span> 감기</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>2. 주요 공구 및 계측기</h2>
+        <h3>배선용 공구</h3>
+        <ul>
+            <li><b>와이어 스트립퍼:</b> 전선 피복 제거</li>
+            <li><b>압착 펜치:</b> 터미널과 전선 압착</li>
+            <li><b>오스터형 스타크:</b> 금속 전선관 나사 내기</li>
+            <li><b>파이프 벤더:</b> 금속관 굽히기 (반지름은 안지름의 <span class="data">6배 이상</span>)</li>
+            <li><b>노크아웃 펀치:</b> 배전반 구멍 뚫기</li>
+            <li><b>피쉬 테이프:</b> 관 내 전선 삽입용 (요비선)</li>
+        </ul>
+        <h3>측정기 용도</h3>
+        <ul>
+            <li><b>어스 테스터:</b> 접지 저항 측정</li>
+            <li><b>메거(Megger):</b> <span class="important">절연 저항 측정</span></li>
+            <li><b>클램프 미터:</b> 회로 차단 없이 전류 측정</li>
+            <li><b>회로 시험기(Tester):</b> 전압, 저항, 전류 간이 측정</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>3. 배선 공사방법 (관/덕트)</h2>
+        <h3>합성수지관 (PVC)</h3>
+        <ul>
+            <li><b>지지점 거리:</b> <span class="data">1.5m 이하</span></li>
+            <li><b>관 상호 접속:</b> 커플링 사용, 삽입 깊이는 바깥지름의 <span class="data">1.2배</span> (접착제 사용 시 <span class="data">0.8배</span>)</li>
+            <li><b>관 두께:</b> <span class="data">2mm 이상</span> 필수</li>
+        </ul>
+        <h3>금속관 공사</h3>
+        <ul>
+            <li><b>지지점 거리:</b> <span class="data">2.0m 이하</span></li>
+            <li><b>나사 없는 커플링:</b> 관 자체에 나사가 없을 때 사용</li>
+            <li><b>부싱:</b> 전선 피복 보호 (관 끝부분 설치)</li>
+            <li><b>록너트:</b> 관과 박스 고정 (안팎 2개 사용)</li>
+            <li><b>굴곡 반지름:</b> 관 내경의 <span class="data">6배 이상</span>, 굴곡 각도 <span class="data">90도 미만</span></li>
+        </ul>
+        <h3>금속가요전선관 (플렉시블)</h3>
+        <ul>
+            <li><b>지지점 거리:</b> <span class="data">1.0m 이하</span></li>
+            <li><b>사용 장소:</b> 엘리베이터, 전동기 등 진동 부위</li>
+            <li><b>커플링:</b> 콤비네이션(가요관+금속관), 스트레이트(가요관+가요관)</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. 덕트 및 기타 공사</h2>
+        <h3>금속 덕트</h3>
+        <ul>
+            <li><b>지지점 거리:</b> <span class="data">3.0m 이하</span> (수직은 6m)</li>
+            <li><b>전선 점유율:</b> 단면적의 <span class="data">20% 이하</span> (제어회로 등은 50%)</li>
+            <li><b>덕트 끝부분:</b> 반드시 폐쇄할 것</li>
+        </ul>
+        <h3>라이팅 덕트</h3>
+        <ul>
+            <li><b>지지점 거리:</b> <span class="data">2.0m 이하</span></li>
+            <li><b>설치 방향:</b> 개구부가 아래를 향하게 설치</li>
+        </ul>
+        <h3>애자 사용 공사</h3>
+        <ul>
+            <li><b>전선 상호 간격:</b> <span class="data">6cm 이상</span></li>
+            <li><b>전선과 조영재 간격:</b> <span class="data">2.5cm 이상</span> (400V 초과 시 4.5cm)</li>
+            <li><b>지지점 거리:</b> <span class="data">2.0m 이하</span></li>
+        </ul>
+    </section>
+</div>
+
+<div class="info-box">
+    <b>★ 핵심 암기 팁 (지지점 거리 요약) ★</b><br>
+    애자(<span class="data">2m</span>) / 합성수지관(<span class="data">1.5m</span>) / 금속관(<span class="data">2m</span>) / 가요전선관(<span class="data">1m</span>) / 금속덕트(<span class="data">3m</span>) / 케이블(<span class="data">2m</span>) / 캡타이어케이블(<span class="data">1m</span>)
+</div>
+
+</body>
+</html>

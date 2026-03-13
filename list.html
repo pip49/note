@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전기기능사 초압축 요약 (ALL-IN-ONE)</title>
+    <style>
+        body { font-family: 'Malgun Gothic', sans-serif; margin: 2px; background: #fff; line-height: 1.1; }
+        .wrapper { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; width: 100vw; }
+        section { border: 1px solid #000; padding: 2px; font-size: 0.55rem; letter-spacing: -0.5px; }
+        h1 { font-size: 0.75rem; text-align: center; margin: 0; background: #eee; border-bottom: 1px solid #000; }
+        h2 { font-size: 0.65rem; margin: 2px 0 1px 0; border-left: 3px solid #333; padding-left: 2px; background: #f9f9f9; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        li { border-bottom: 0.1px solid #eee; margin-bottom: 1px; }
+        b { color: #000; font-weight: bold; }
+        .formula { font-weight: bold; background: #f0f0f0; display: inline-block; padding: 0 1px; }
+        .imp { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <section>
+            <h1>1. 전기이론</h1>
+            <h2>직류회로/정전기</h2>
+            <ul>
+                <li><b>오옴:</b> <span class="formula">V=IR, P=VI=I²R=V²/R</span></li>
+                <li><b>저항:</b> <span class="formula">R=ρ·L/A</span> (온도↑ 저항↑)</li>
+                <li><b>키르히호프:</b> 1법칙(전류), 2법칙(전압)</li>
+                <li><b>쿨롱:</b> <span class="formula">F=9x10⁹·q1q2/r²</span></li>
+                <li><b>전계:</b> <span class="formula">E=F/q=V/d</span></li>
+                <li><b>콘덴서:</b> <span class="formula">C=ε·A/d</span>, 에너지 <span class="formula">W=1/2·CV²</span></li>
+                <li><b>정전용량:</b> 직렬(합분의곱), 병렬(단순합)</li>
+            </ul>
+            <h2>자기현상</h2>
+            <ul>
+                <li><b>자기력:</b> <span class="formula">F=μH, B=Φ/A</span></li>
+                <li><b>기자력:</b> <span class="formula">F=NI=RΦ</span></li>
+                <li><b>전자력:</b> <span class="formula">F=BIl sinθ</span></li>
+                <li><b>로렌츠:</b> <span class="formula">F=qvB sinθ</span></li>
+                <li><b>인덕턴스:</b> <span class="formula">L=NΦ/I</span>, 에너지 <span class="formula">W=1/2·LI²</span></li>
+                <li><b>자기인덕턴스:</b> <span class="formula">L=μn²Al</span></li>
+                <li><b>상호유도:</b> <span class="formula">M=k√(L1L2)</span></li>
+            </ul>
+            <h2>교류/다상회로</h2>
+            <ul>
+                <li><b>교류:</b> <span class="formula">v=Vm sin(ωt+θ)</span>, <span class="formula">ω=2πf</span></li>
+                <li><b>리액턴스:</b> <span class="formula">XL=2πfL, XC=1/2πfC</span></li>
+                <li><b>임피던스:</b> <span class="formula">Z=√(R²+X²)</span></li>
+                <li><b>전력:</b> 피상(VI), 유효(VI cosθ), 무효(VI sinθ)</li>
+                <li><b>역률:</b> <span class="formula">cosθ = R/Z</span></li>
+                <li><b>3상전력:</b> <span class="formula">P=√3 VI cosθ</span></li>
+                <li><b>결선:</b> Δ(Vl=Vp, Il=√3Ip), Y(Vl=√3Vp, Il=Ip)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>2. 전기기기</h1>
+            <h2>직류기(발전기/전동기)</h2>
+            <ul>
+                <li><b>구조:</b> 계자, 전기자, 정류자, 브러시</li>
+                <li><b>기전력:</b> <span class="formula">E=(pZ/60a)ΦN</span></li>
+                <li><b>속도:</b> <span class="formula">N=(V-IaRa)/kΦ</span></li>
+                <li><b>토크:</b> <span class="formula">τ=kΦIa</span></li>
+                <li><b>특성:</b> 타여자, 분권, 복권, 직권(τ∝I²)</li>
+                <li><b>정류:</b> 리액턴스 전압↓, 탄소브러시, 보극</li>
+            </ul>
+            <h2>변압기</h2>
+            <ul>
+                <li><b>원리:</b> 전자유도(상호유도)</li>
+                <li><b>권수비:</b> <span class="formula">a=N1/N2=V1/V2=I2/I1=√(Z1/Z2)</span></li>
+                <li><b>손실:</b> 무부하손(철손-히스테리시스,와류), 부하손(동손)</li>
+                <li><b>변압기유:</b> 절연내력↑, 인화점↑, 응고점↓</li>
+                <li><b>결선:</b> Δ-Δ(제3고조파 제거), V-V(이용률 86.6%, 출력 57.7%)</li>
+            </ul>
+            <h2>유도기/동기기</h2>
+            <ul>
+                <li><b>동기속도:</b> <span class="formula">Ns=120f/p</span></li>
+                <li><b>슬립:</b> <span class="formula">s=(Ns-N)/Ns</span>, <span class="formula">N=Ns(1-s)</span></li>
+                <li><b>동기기:</b> 계자회전형, <span class="formula">f=pn/120</span></li>
+                <li><b>안정도 향상:</b> 단락비↑, 관성↑, 조속기 신속</li>
+                <li><b>정류기:</b> 다이오드(단방향), SCR(위상제어)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>3. 전기설비</h1>
+            <h2>전선/공구</h2>
+            <ul>
+                <li><b>도체:</b> 연동선(58), 경동선(1/55)</li>
+                <li><b>절연체:</b> IV, HIV, CV, OW(실외), DV(인입)</li>
+                <li><b>굵기:</b> 1.5, 2.5, 4, 6, 10, 16...</li>
+                <li><b>공구:</b> 와이어스트립퍼(피복), 펜치, 클램프미터(전류)</li>
+            </ul>
+            <h2>배선공사</h2>
+            <ul>
+                <li><b>금속관:</b> 두께(폭연성 1.2mm이상), 접지필수</li>
+                <li><b>합성수지:</b> 관지지점(1.5m), 온도변화 고려</li>
+                <li><b>금속덕트:</b> 지지점(3m), 끝부분 폐쇄</li>
+                <li><b>가요전선관:</b> 1종(비방습), 2종(방습)</li>
+                <li><b>케이블공사:</b> 지지점(2m, 캡타이어 1m)</li>
+            </ul>
+            <h2>보호/접지/조명</h2>
+            <ul>
+                <li><b>접지:</b> 인체보호, 화재방지. 색상(녹-노)</li>
+                <li><b>차단기:</b> ELB(누전), MCCB(배선용), ACB(기중)</li>
+                <li><b>절연저항:</b> SELV/PELV(0.5MΩ), 500V이하(1.0MΩ)</li>
+                <li><b>조명:</b> <span class="formula">F·U·N = E·A·D</span> (펀은에드)</li>
+                <li><b>폭연성장소:</b> 금속관, 케이블 공사만 가능</li>
+                <li><b>방습장소:</b> 고무패킹, 방습형 등기구</li>
+            </ul>
+        </section>
+    </div>
+</body>
+</html>
