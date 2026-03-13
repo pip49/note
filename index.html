@@ -95,6 +95,32 @@
     font-size: 0.7rem;
     color: #ecf0f1;
 }
+	/* 격언 카드 스타일 */
+.proverb-container {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: none;
+    width: 100%;
+    max-width: 600px;
+    box-sizing: border-box;
+    margin-top: 40px; /* 메인 카드와의 간격 */
+    text-align: center;
+}
+
+.proverb-text {
+    font-size: 0.95rem;
+    color: #7f8c8d;
+    font-style: italic;
+    line-height: 1.6;
+    word-break: keep-all;
+}
+
+/* 전체 레이아웃 정렬을 위한 body 수정 */
+body {
+    flex-direction: column; /* 카드를 세로로 배치 */
+    align-items: center;
+}
     </style>
 </head>
 <body>
@@ -130,6 +156,11 @@
     </div>
 
     <p class="info" id="statusInfo">모드를 선택하고 학습을 시작하세요.</p>
+
+    <div class="proverb-container">
+    <div id="proverbText" class="proverb-text">오늘의 한 마디를 불러오는 중...</div>
+</div>
+
 <div class="mini-footer">
     <div class="footer-links">
         <a href="list.html">목차</a>
@@ -260,6 +291,25 @@
     let isRandomMode = true;
     let sequentialIndex = 0;
 
+  // 1. 격언 데이터 (원하는 만큼 추가하세요)
+const proverbData = [
+    "Success is not final, failure is not fatal: it is the courage to continue that counts.",
+    "인생에서 가장 큰 영광은 넘어지지 않는 것이 아니라 넘어질 때마다 일어서는 데 있다.",
+    "The only way to do great work is to love what you do. - Steve Jobs",
+    "천재는 1%의 영감과 99%의 노력으로 이루어진다.",
+    "Believe you can and you're halfway there.",
+    "어제보다 나은 오늘을 만드는 것은 당신의 의지입니다.",
+    "Don't watch the clock; do what it does. Keep going.",
+    "작은 기회로부터 종종 위대한 업적이 시작된다."
+];
+
+// 2. 격언을 랜덤하게 보여주는 함수
+function displayProverb() {
+    const proverbElement = document.getElementById('proverbText');
+    const randomIndex = Math.floor(Math.random() * proverbData.length);
+    proverbElement.innerText = proverbData[randomIndex];
+}
+
     function toggleMode() {
         isRandomMode = !isRandomMode;
         const modeBtn = document.getElementById('modeBtn');
@@ -355,6 +405,7 @@ function goToQuiz() {
 
         const modeLabel = isRandomMode ? "랜덤" : "순차";
         document.getElementById('quiz-count').innerText = `[${modeLabel} 모드] 문항 번호: ${index + 1} / 전체 ${quizData.length}`;
+	  displayProverb();
         window.scrollTo(0, 0);
     }
 
