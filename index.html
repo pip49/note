@@ -158,10 +158,14 @@ body {
     margin-top: 10px;
     font-size: 0.85rem;
     color: #2c3e50;
-    min-height: 1.2em;
-    padding: 5px;
+    min-height: 40px;      /* 최소 높이 */
+    max-height: 250px;     /* 결과가 아주 길 때만 스크롤 발생 */
+    overflow-y: auto;      /* 내용이 많으면 박스 내부 스크롤 생성 */
+    padding: 12px;
     border-left: 3px solid #3498db;
     background: #eff7fd;
+    white-space: pre-wrap; /* 줄바꿈(엔터) 유지 */
+    word-break: break-word;/* 긴 단어도 자동 줄바꿈 */
 }
     </style>
 </head>
@@ -485,7 +489,6 @@ function showAnswer() {
 
 window.onload = nextQuiz;
 
-// 번역 및 음성 읽기 기능
 async function runTranslate() {
     const text = document.getElementById('aiInput').value;
     const resultDiv = document.getElementById('aiResult');
@@ -501,7 +504,11 @@ async function runTranslate() {
     try {
         const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${targetLang}&dt=t&q=${encodeURI(text)}`);
         const data = await res.json();
-        resultDiv.innerText = data[0][0][0];
+
+        // 중요: 장문의 경우 data[0]의 각 배열 조각을 모두 합쳐야 전체 문장이 나옵니다.
+        const translatedFullText = data[0].map(item => item[0]).join("");
+
+        resultDiv.innerText = translatedFullText;
     } catch (e) {
         resultDiv.innerText = "번역 실패. 인터넷 연결을 확인하세요.";
     }
