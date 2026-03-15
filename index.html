@@ -515,14 +515,20 @@ async function runTranslate() {
 }
 
 function runSpeak() {
-    const text = document.getElementById('aiInput').value;
-    if (!text) return;
+    // 1. 번역 결과창(aiResult)에 텍스트가 있으면 그걸 가져오고, 없으면 입력창(aiInput) 텍스트를 가져옵니다.
+    const resultText = document.getElementById('aiResult').innerText;
+    const inputText = document.getElementById('aiInput').value;
+    
+    // 번역 결과가 "번역 중..."이 아닐 때만 결과창 텍스트를 우선 사용합니다.
+    const textToSpeak = (resultText && resultText !== "번역 중...") ? resultText : inputText;
+
+    if (!textToSpeak) return;
 
     window.speechSynthesis.cancel(); // 기존 소리 멈춤
-    const speech = new SpeechSynthesisUtterance(text);
+    const speech = new SpeechSynthesisUtterance(textToSpeak);
 
-    // 언어 감지 후 설정
-    const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(text);
+    // 읽어줄 텍스트의 언어 감지 (한글 포함 여부)
+    const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(textToSpeak);
     speech.lang = isKorean ? 'ko-KR' : 'en-US';
     speech.rate = 1.0;
 
