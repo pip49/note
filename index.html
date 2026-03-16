@@ -145,14 +145,6 @@ body {
     gap: 5px;
     margin-top: 8px;
 }
-<div class="ai-btn-group">
-    <button class="ai-btn" onclick="runTranslate()">번역하기</button>
-    <button class="ai-btn" onclick="runTranslateJP()" style="background: #e74c3c;">JP 번역</button> <button class="ai-btn speak" onclick="runSpeak()">🔊 읽어주기</button>
-    <button class="ai-btn" onclick="clearInput()" style="background: #95a5a6;">초기화</button>
-</div>
-
-<div id="aiResultJP" class="translation-result" style="display:none; border-left-color: #e74c3c; background: #fef5f5;"></div>
-
 .ai-btn {
     flex: 1;
     padding: 8px !important;
@@ -560,64 +552,6 @@ function clearInput() {
     window.speechSynthesis.cancel(); // 읽어주던 목소리도 중단
 }
 
-
-
-async function runTranslateJP() {
-    const text = document.getElementById('aiInput').value;
-    const resultDivJP = document.getElementById('aiResultJP');
-
-    if (!text) { alert("내용을 입력해주세요."); return; }
-
-    resultDivJP.style.display = 'block';
-    resultDivJP.innerText = "일본어 번역 중...";
-
-    try {
-        // tl=ja 로 설정하여 일본어로 번역합니다.
-        const res = await fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=ja&dt=t&q=${encodeURI(text)}`);
-        const data = await res.json();
-        const translatedFullText = data[0].map(item => item[0]).join("");
-
-        resultDivJP.innerText = translatedFullText;
-    } catch (e) {
-        resultDivJP.innerText = "일본어 번역 실패.";
-    }
-}
-
-function runSpeak() {
-    const resultText = document.getElementById('aiResult').innerText;
-    const resultTextJP = document.getElementById('aiResultJP').innerText; // 일본어 결과창 확인
-    const inputText = document.getElementById('aiInput').value;
-
-    window.speechSynthesis.cancel();
-
-    // 1. 일본어 결과창에 내용이 있고 "번역 중"이 아닐 때 (가장 우선순위)
-    if (resultTextJP && resultTextJP !== "일본어 번역 중...") {
-        const speech = new SpeechSynthesisUtterance(resultTextJP);
-        speech.lang = 'ja-JP'; // 일본어 설정
-        window.speechSynthesis.speak(speech);
-    }
-    // 2. 그 외 기존 로직 (한글/영어 번역 결과 혹은 입력창)
-    else {
-        const textToSpeak = (resultText && resultText !== "번역 중...") ? resultText : inputText;
-        if (!textToSpeak) return;
-        const speech = new SpeechSynthesisUtterance(textToSpeak);
-        const isKorean = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/.test(textToSpeak);
-        speech.lang = isKorean ? 'ko-KR' : 'en-US';
-        window.speechSynthesis.speak(speech);
-    }
-}
-
-function clearInput() {
-    document.getElementById('aiInput').value = "";
-    document.getElementById('aiResult').innerText = "";
-    document.getElementById('aiResult').style.display = 'none';
-
-    // 일본어창도 같이 초기화
-    document.getElementById('aiResultJP').innerText = "";
-    document.getElementById('aiResultJP').style.display = 'none';
-
-    window.speechSynthesis.cancel();
-}
 </script>
 
 </body>
